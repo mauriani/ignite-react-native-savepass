@@ -35,10 +35,12 @@ export function Home() {
 
     const response = await AsyncStorage.getItem(dataKey);
 
-    const responseFormatted = response ? JSON.parse(response) : [];
+    if (response) {
+      const responseFormatted = response ? JSON.parse(response) : [];
 
-    setSearchListData([...responseFormatted]);
-    setData([...responseFormatted]);
+      setSearchListData([...searchListData, responseFormatted]);
+      setData([responseFormatted]);
+    }
   }
 
   function handleFilterLoginData() {
