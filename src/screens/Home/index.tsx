@@ -38,13 +38,18 @@ export function Home() {
     if (response) {
       const responseFormatted = response ? JSON.parse(response) : [];
 
-      setSearchListData([...searchListData, responseFormatted]);
-      setData([responseFormatted]);
+      setSearchListData([...responseFormatted]);
+      setData([...responseFormatted]);
     }
   }
 
   function handleFilterLoginData() {
     // Filter results inside data, save with setSearchListData
+
+    if (searchText !== "") {
+      const list = data.filter((item) => item.service_name === searchText);
+      setSearchListData(list);
+    }
   }
 
   function handleChangeInputText(text: string) {
@@ -57,8 +62,6 @@ export function Home() {
       loadData();
     }, [])
   );
-
-  console.log(searchListData);
 
   return (
     <>
